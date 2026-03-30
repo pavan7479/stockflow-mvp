@@ -1,8 +1,8 @@
 from typing import List, Optional
-from pydantic import BaseModel, EmailStr
+from pydantic import BaseModel, EmailStr, Field, model_validator
 from datetime import datetime
 
-# Organization Schemas
+# --- Organization Schemas ---
 class OrganizationBase(BaseModel):
     name: str
     default_low_stock_threshold: int = 5
@@ -14,15 +14,18 @@ class Organization(OrganizationBase):
     id: int
     created_at: datetime
     updated_at: Optional[datetime]
-
     model_config = {"from_attributes": True}
 
-# User Schemas
+class OrganizationOut(OrganizationBase):
+    id: int
+    model_config = {"from_attributes": True}
+
+# --- User Schemas ---
 class UserBase(BaseModel):
     email: EmailStr
 
 class UserCreate(UserBase):
-    password: str
+    password: str = Field(..., min_length=6)
     organization_id: int
 
 class User(UserBase):
@@ -30,10 +33,15 @@ class User(UserBase):
     organization_id: int
     created_at: datetime
     updated_at: Optional[datetime]
-
     model_config = {"from_attributes": True}
 
-# Product Schemas
+class UserOut(UserBase):
+    id: int
+    organization_id: int
+    created_at: datetime
+    model_config = {"from_attributes": True}
+
+# --- Product Schemas ---
 class ProductBase(BaseModel):
     name: str
     sku: str
@@ -54,14 +62,33 @@ class Product(ProductBase):
     organization_id: int
     created_at: datetime
     updated_at: Optional[datetime]
+    model_config = {"from_attributes": True}
 
-    class Config:
-        orm_mode = True
+# --- Auth Schemas ---
+class SignupRequest(BaseModel):
+    email: EmailStr
+    password: str = Field(..., min_length=6)
+    confirm_password: str = Field(..., min_length=6)
+    organization_name: str = Field(..., min_length=1)
 
-# Auth Schemas
+    @model_validator(mode='after')
+    def check_passwords_match(self) -> 'SignupRequest':
+        if self.password != self.confirm_password:
+            raise ValueError('passwords do not match')
+        return self
+
+class LoginRequest(BaseModel):
+    email: EmailStr
+    password: str
+
+class TokenResponse(BaseModel):
+    access_token: str
+    token_type: str = "bearer"
+
 class Token(BaseModel):
     access_token: str
     token_type: str
 
 class TokenData(BaseModel):
-    email: Optional[str] = None
+    user_id: Optional[str] = None
+    org_id: Optional[int] = None
