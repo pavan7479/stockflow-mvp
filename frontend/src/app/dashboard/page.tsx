@@ -9,10 +9,9 @@ import Button from "@/components/ui/Button";
 import { apiGet } from "@/lib/api";
 
 interface DashboardData {
-  totalProducts: number;
-  totalQuantity: number;
-  lowStockItemsCount: number;
-  lowStockItems: Array<{
+  total_products: number;
+  total_quantity: number;
+  low_stock_items: Array<{
     id: number;
     name: string;
     sku: string;
@@ -25,6 +24,8 @@ export default function DashboardPage() {
   const [data, setData] = useState<DashboardData | null>(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
+
+  const lowStockCount = data?.low_stock_items.length || 0;
 
   const fetchDashboard = async () => {
     setLoading(true);
@@ -81,7 +82,7 @@ export default function DashboardPage() {
               <>
                 <StatCard
                   label="Total Products"
-                  value={data?.totalProducts || 0}
+                  value={data?.total_products || 0}
                   variant="blue"
                   icon={
                     <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -91,7 +92,7 @@ export default function DashboardPage() {
                 />
                 <StatCard
                   label="Total Units"
-                  value={data?.totalQuantity || 0}
+                  value={data?.total_quantity || 0}
                   variant="green"
                   icon={
                     <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -101,9 +102,9 @@ export default function DashboardPage() {
                 />
                 <StatCard
                   label="Low Stock Alerts"
-                  value={data?.lowStockItemsCount || 0}
+                  value={lowStockCount}
                   variant="amber"
-                  pulse={(data?.lowStockItemsCount || 0) > 0}
+                  pulse={lowStockCount > 0}
                   icon={
                     <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" />
@@ -147,8 +148,8 @@ export default function DashboardPage() {
                         <td className="px-6 py-4"><Skeleton className="h-4 w-20 float-right" /></td>
                       </tr>
                     ))
-                  ) : data?.lowStockItems.length ? (
-                    data.lowStockItems.map((item) => (
+                  ) : data?.low_stock_items.length ? (
+                    data.low_stock_items.map((item) => (
                       <tr key={item.id} className="hover:bg-white/[0.02] transition-colors group">
                         <td className="px-6 py-4 font-semibold text-white">{item.name}</td>
                         <td className="px-6 py-4 text-primary-muted font-mono text-xs">{item.sku}</td>
