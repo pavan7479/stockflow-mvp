@@ -1,9 +1,15 @@
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 from routers import auth, products, dashboard, settings
+from database import engine, Base
+import models  # noqa: F401 — ensures all models register with Base metadata
 import os
 
 app = FastAPI(title="StockFlow API")
+
+# Create all tables on startup (safe: skips existing tables)
+Base.metadata.create_all(bind=engine)
+
 
 app.add_middleware(
     CORSMiddleware,
