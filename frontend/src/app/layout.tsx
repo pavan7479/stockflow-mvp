@@ -13,6 +13,8 @@ export const metadata: Metadata = {
   description: "Modern SaaS inventory management for your organization.",
 };
 
+import { ToastProvider } from "@/components/ui/Toast";
+
 export default function RootLayout({
   children,
 }: Readonly<{
@@ -21,7 +23,9 @@ export default function RootLayout({
   return (
     <html lang="en" className={dmSans.variable}>
       <body className="antialiased min-h-screen bg-background text-primary">
-        {children}
+        <ToastProvider>
+          {children}
+        </ToastProvider>
       </body>
     </html>
   );
