@@ -2,7 +2,7 @@
 
 import React, { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
-import { isAuthenticated } from "@/lib/auth";
+import { isAuthenticated } from "../lib/auth";
 import Navbar from "./Navbar";
 
 export default function ProtectedLayout({
