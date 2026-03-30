@@ -3,7 +3,7 @@
 import React, { useState, useEffect } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { logout } from "../lib/auth";
+import { logout } from "@/lib/auth";
 import Button from "@/components/ui/Button";
 import { apiGet } from "@/lib/api";
 
