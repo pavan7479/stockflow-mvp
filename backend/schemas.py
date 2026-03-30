@@ -44,6 +44,7 @@ class User(UserBase):
 class UserOut(UserBase):
     id: int
     organization_id: int
+    organization_name: Optional[str] = None
     created_at: datetime
     model_config = {"from_attributes": True}
 

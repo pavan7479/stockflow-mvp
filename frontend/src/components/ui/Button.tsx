@@ -3,15 +3,18 @@ import React from "react";
 interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
   variant?: "primary" | "danger" | "ghost";
   isLoading?: boolean;
+  loading?: boolean;
 }
 
 const Button = ({
   children,
   variant = "primary",
   isLoading = false,
+  loading = false,
   className = "",
   ...props
 }: ButtonProps) => {
+  const isPending = isLoading || loading;
   const variants = {
     primary: "bg-accent hover:bg-accent-hover text-white",
     danger: "bg-danger hover:bg-red-700 text-white",
@@ -22,12 +25,12 @@ const Button = ({
     <button
       className={`relative px-4 py-2 rounded-lg font-medium transition-all duration-200 flex items-center justify-center gap-2
         ${variants[variant]}
-        ${isLoading || props.disabled ? "opacity-70 cursor-not-allowed" : ""}
+        ${isPending || props.disabled ? "opacity-70 cursor-not-allowed" : ""}
         ${className}`}
-      disabled={isLoading || props.disabled}
+      disabled={isPending || props.disabled}
       {...props}
     >
-      {isLoading && (
+      {isPending && (
         <svg
           className="animate-spin h-4 w-4 text-current"
           xmlns="http://www.w3.org/2000/svg"
@@ -49,8 +52,8 @@ const Button = ({
           ></path>
         </svg>
       )}
-      <span className={isLoading ? "opacity-0" : "opacity-100"}>{children}</span>
-      {isLoading && <span className="absolute inset-0 flex items-center justify-center">...</span>}
+      <span className={isPending ? "opacity-0" : "opacity-100"}>{children}</span>
+      {isPending && <span className="absolute inset-0 flex items-center justify-center">...</span>}
     </button>
   );
 };

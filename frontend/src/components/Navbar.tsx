@@ -1,14 +1,31 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { logout } from "@/lib/auth";
 import Button from "@/components/ui/Button";
+import { apiGet } from "@/lib/api";
 
 const Navbar = () => {
   const pathname = usePathname();
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [orgName, setOrgName] = useState<string>("");
+
+  useEffect(() => {
+    const fetchOrg = async () => {
+      try {
+        const response = await apiGet("/api/auth/me");
+        if (response.ok) {
+          const data = await response.json();
+          if (data.organization_name) {
+            setOrgName(data.organization_name);
+          }
+        }
+      } catch {}
+    };
+    fetchOrg();
+  }, []);
 
   const navLinks = [
     { name: "Dashboard", href: "/dashboard" },
@@ -30,7 +47,7 @@ const Navbar = () => {
                 </svg>
               </div>
               <span className="text-xl font-bold tracking-tighter text-white group-hover:text-accent transition-colors">
-                StockFlow
+                {orgName || "StockFlow"}
               </span>
             </Link>
           </div>

@@ -49,4 +49,7 @@ async def login(request: schemas.LoginRequest, db: Session = Depends(get_db)):
 
 @router.get("/me", response_model=schemas.UserOut)
 async def get_me(current_user: models.User = Depends(get_current_user)):
-    return current_user
+    user_out = schemas.UserOut.model_validate(current_user)
+    if current_user.organization:
+        user_out.organization_name = current_user.organization.name
+    return user_out
