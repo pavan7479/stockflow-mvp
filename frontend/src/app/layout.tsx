@@ -13,7 +13,7 @@ export const metadata: Metadata = {
   description: "Modern SaaS inventory management for your organization.",
 };
 
-import { ToastProvider } from "@/components/ui/Toast";
+import { ToastProvider } from "../components/ui/Toast";
 
 export default function RootLayout({
   children,

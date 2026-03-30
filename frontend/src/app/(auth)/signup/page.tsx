@@ -3,9 +3,9 @@
 import React, { useState } from "react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
-import Input from "@/components/ui/Input";
-import Button from "@/components/ui/Button";
-import { apiPost, setToken } from "@/lib/api";
+import Input from "../../../components/ui/Input";
+import Button from "../../../components/ui/Button";
+import { apiPost, setToken } from "../../../lib/api";
 
 export default function SignupPage() {
   const router = useRouter();

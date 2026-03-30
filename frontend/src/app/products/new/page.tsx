@@ -2,10 +2,10 @@
 
 import React, { useState } from "react";
 import { useRouter } from "next/navigation";
-import ProtectedLayout from "@/components/ProtectedLayout";
-import ProductForm from "@/components/ProductForm";
-import { apiPost } from "@/lib/api";
-import { useToast } from "@/components/ui/Toast";
+import ProtectedLayout from "../../../components/ProtectedLayout";
+import ProductForm from "../../../components/ProductForm";
+import { apiPost } from "../../../lib/api";
+import { useToast } from "../../../components/ui/Toast";
 
 export default function NewProductPage() {
   const router = useRouter();

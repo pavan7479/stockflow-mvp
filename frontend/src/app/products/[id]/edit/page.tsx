@@ -2,13 +2,13 @@
 
 import React, { useEffect, useState, useCallback } from "react";
 import { useRouter, useParams } from "next/navigation";
-import ProtectedLayout from "@/components/ProtectedLayout";
-import ProductForm from "@/components/ProductForm";
-import Button from "@/components/ui/Button";
-import Input from "@/components/ui/Input";
-import Skeleton from "@/components/ui/Skeleton";
-import { apiGet, apiPut, apiPatch, apiDelete } from "@/lib/api";
-import { useToast } from "@/components/ui/Toast";
+import ProtectedLayout from "../../../../components/ProtectedLayout";
+import ProductForm from "../../../../components/ProductForm";
+import Button from "../../../../components/ui/Button";
+import Input from "../../../../components/ui/Input";
+import Skeleton from "../../../../components/ui/Skeleton";
+import { apiGet, apiPut, apiPatch, apiDelete } from "../../../../lib/api";
+import { useToast } from "../../../../components/ui/Toast";
 
 interface Product {
   id: number;

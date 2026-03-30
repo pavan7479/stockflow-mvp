@@ -2,12 +2,12 @@
 
 import React, { useEffect, useState, useMemo, useCallback } from "react";
 import { useRouter } from "next/navigation";
-import ProtectedLayout from "@/components/ProtectedLayout";
-import Badge from "@/components/ui/Badge";
-import Button from "@/components/ui/Button";
-import Skeleton from "@/components/ui/Skeleton";
-import { apiGet, apiDelete } from "@/lib/api";
-import { useToast } from "@/components/ui/Toast";
+import ProtectedLayout from "../../components/ProtectedLayout";
+import Badge from "../../components/ui/Badge";
+import Button from "../../components/ui/Button";
+import Skeleton from "../../components/ui/Skeleton";
+import { apiGet, apiDelete } from "../../lib/api";
+import { useToast } from "../../components/ui/Toast";
 
 interface Product {
   id: number;

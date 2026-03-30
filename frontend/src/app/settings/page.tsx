@@ -1,11 +1,11 @@
 "use client";
 
 import React, { useEffect, useState, useCallback } from "react";
-import ProtectedLayout from "@/components/ProtectedLayout";
-import Input from "@/components/ui/Input";
-import Button from "@/components/ui/Button";
-import { apiGet, apiPut } from "@/lib/api";
-import { useToast } from "@/components/ui/Toast";
+import ProtectedLayout from "../../components/ProtectedLayout";
+import Input from "../../components/ui/Input";
+import Button from "../../components/ui/Button";
+import { apiGet, apiPut } from "../../lib/api";
+import { useToast } from "../../components/ui/Toast";
 
 export default function SettingsPage() {
   const { showToast } = useToast();

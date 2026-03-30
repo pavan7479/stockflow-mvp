@@ -1,12 +1,12 @@
 "use client";
 
 import React, { useEffect, useState } from "react";
-import ProtectedLayout from "@/components/ProtectedLayout";
-import StatCard from "@/components/ui/StatCard";
-import Skeleton from "@/components/ui/Skeleton";
-import Badge from "@/components/ui/Badge";
-import Button from "@/components/ui/Button";
-import { apiGet } from "@/lib/api";
+import ProtectedLayout from "../../components/ProtectedLayout";
+import StatCard from "../../components/ui/StatCard";
+import Skeleton from "../../components/ui/Skeleton";
+import Badge from "../../components/ui/Badge";
+import Button from "../../components/ui/Button";
+import { apiGet } from "../../lib/api";
 
 interface DashboardData {
   total_products: number;
